@@ -7,9 +7,11 @@ import net.minecraftforge.fml.config.ModConfig;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.regex.Pattern;
 
 public class LPCConfig {
+    public static final AtomicReference<ForgeConfigSpec> BUILT_CONFIG = new AtomicReference<>();
     private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder().comment(
             "LPC Configuration",
             "https://luckperms.net/wiki/Prefixes,-Suffixes-&-Meta",
@@ -45,7 +47,7 @@ public class LPCConfig {
                     "\"{prefix}{name}{suffix}&r: {message}\"",
                     "\"{prefix}{username-color}{name}&r: {message-color}{message}\""
             )
-            .define("chat-format", "");
+            .define("chat-format", "{prefix}{name}{suffix}&r: {message}");
 
     public static final ForgeConfigSpec.ConfigValue<List<String>> groupFormats = BUILDER
             .comment(
@@ -68,6 +70,7 @@ public class LPCConfig {
 
     @SuppressWarnings("deprecated, removal")
     public static void register() {
-        ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, BUILDER.build(), "lpc.toml");
+        BUILT_CONFIG.set(BUILDER.build());
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, BUILT_CONFIG.get(), "lpc.toml");
     }
 }

@@ -1,8 +1,12 @@
 package dev.tauri.lpc;
 
+import dev.tauri.lpc.command.LPCCommands;
 import dev.tauri.lpc.config.LPCConfig;
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.LuckPermsProvider;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.RegisterCommandsEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.ModList;
 import net.minecraftforge.fml.common.Mod;
 import org.slf4j.Logger;
@@ -58,5 +62,12 @@ public class LPC {
         LPC.logger.info("Loading LPC version {}", LPC.MOD_VERSION);
 
         LPCConfig.register();
+        MinecraftForge.EVENT_BUS.register(this);
+        displayWelcomeMessage();
+    }
+
+    @SubscribeEvent
+    public void onCommandsRegister(RegisterCommandsEvent event) {
+        LPCCommands.registerCommands(event);
     }
 }

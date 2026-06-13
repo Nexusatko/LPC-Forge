@@ -27,6 +27,10 @@ public class ComponentUtils {
         return net.minecraft.network.chat.Component.Serializer.fromJson(GsonComponentSerializer.gson().serialize(component));
     }
 
+    public static net.minecraft.network.chat.Component toMCComponentColored(String text) {
+        return toMCComponent(colorFormat(text));
+    }
+
     public static String convertHex(String input) {
         if (input == null) return null;
 
