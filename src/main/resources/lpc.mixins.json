@@ -1,0 +1,14 @@
+{
+  "required": true,
+  "package": "dev.tauri.lpc.mixins",
+  "refmap": "lpc.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "MixinPlayerChat"
+  ],
+  "client": [],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
