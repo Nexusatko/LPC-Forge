@@ -38,7 +38,7 @@ public class MixinPlayerChat {
 
             //var newMessageComplete = PlayerChatMessage.unsigned(originalMessage.sender(), newMessage.getString()).withUnsignedContent(newMessage);
             Objects.requireNonNull(player.getServer()).getPlayerList().broadcastSystemMessage(newMessage, false);
-            player.getServer().logChatMessage(newMessage, ChatType.bind(ChatType.CHAT, player), null);
+            // player.getServer().logChatMessage(newMessage, ChatType.bind(ChatType.CHAT, player), null);
 
             ci.cancel();
         } finally {
